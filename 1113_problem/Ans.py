@@ -21,8 +21,7 @@ df_dropped = df.dropna(how='any')
 
 df_Adelie = df_dropped.groupby("species").get_group("Adelie")  # アデリーペンギンのデータ
 df_Gentoo = df_dropped.groupby("species").get_group("Gentoo")  # ジェンツーペンギンのデータ
-df_Chinstrap = df_dropped.groupby("species").get_group(
-    "Chinstrap")  # チンストラップペンギンのデータ
+df_Chinstrap = df_dropped.groupby("species").get_group("Chinstrap")  # チンストラップペンギンのデータ
 
 # problem5:3種類のペンギンの特徴量（口ばしの長さ・厚み、足びれの長さ、体重）のいずれかの頻度分布を調べることで、どのペンギンの種類が一番大柄か、考察せよ。
 
@@ -55,14 +54,13 @@ ax3.set_ylabel('frequency')
 ax3.set_xlim(2000, 6500)
 ax3.set_ylim(0, 26.0)
 
-# plt.show()
-
 # problem6:3種類のペンギンそれぞれについて、特徴量同士の相関を調べ、最も相関が高い特徴量同士の散布図を作成せよ。
 
 df_Adelie_corr = df_Adelie.corr(numeric_only=True)
 df_Gentoo_corr = df_Adelie.corr(numeric_only=True)
 df_Chinstrap_corr = df_Adelie.corr(numeric_only=True)
 
+# 以下のプリント文でどの相関同士が大きいのか見る
 print()
 print('Adelie penguin data correlation:')
 print(df_Adelie_corr)
@@ -73,6 +71,8 @@ print()
 print('Chinstrap penguin data correlation:')
 print(df_Chinstrap_corr)
 
+# 以下で散布図の表示
+# アデリーペンギンの散布図
 fig2 = plt.figure(figsize=(15, 5))
 ax_Ade_1 = fig2.add_subplot(131)
 ax_Ade_1.scatter(df_Adelie[['culmen_depth_mm']], df_Adelie[['body_mass_g']])
@@ -89,11 +89,38 @@ ax_Ade_3.scatter(df_Adelie[['flipper_length_mm']], df_Adelie[['body_mass_g']])
 ax_Ade_3.set_xlabel('flipper_length(mm)')
 ax_Ade_3.set_ylabel('body_mass(g)')
 
-# df_Adelie_corr_1 = df_Adelie[['culmen_depth_mm', 'body_mass_g']]
-# df_Adelie_corr_2 = df_Adelie[['culmen_length_mm', 'body_mass_g']]
-# df_Adelie_corr_3 = df_Adelie[['flipper_length_mm', 'body_mass_g']]
-# df_Adelie_corr_1.plot.scatter(x = 'culmen_depth_mm', y = 'body_mass_g')
-# df_Adelie_corr_2.plot.scatter(x = 'culmen_length_mm', y = 'body_mass_g')
-# df_Adelie_corr_3.plot.scatter(x = 'flipper_length_mm', y = 'body_mass_g')
+# ジェンツーペンギンの散布図
+fig3 = plt.figure(figsize=(15, 5))
+ax_Gen_1 = fig3.add_subplot(131)
+ax_Gen_1.scatter(df_Gentoo[['culmen_depth_mm']], df_Gentoo[['body_mass_g']])
+ax_Gen_1.set_xlabel('culmen_depth(mm)')
+ax_Gen_1.set_ylabel('body_mass(g)')
+
+ax_Gen_2 = fig3.add_subplot(132)
+ax_Gen_2.scatter(df_Gentoo[['culmen_length_mm']], df_Gentoo[['body_mass_g']])
+ax_Gen_2.set_xlabel('culmen_length(mm)')
+ax_Gen_2.set_ylabel('body_mass(g)')
+
+ax_Gen_3 = fig3.add_subplot(133)
+ax_Gen_3.scatter(df_Gentoo[['flipper_length_mm']], df_Gentoo[['body_mass_g']])
+ax_Gen_3.set_xlabel('flipper_length(mm)')
+ax_Gen_3.set_ylabel('body_mass(g)')
+
+# チンストラップペンギンの散布図
+fig4 = plt.figure(figsize=(15, 5))
+ax_Chin_1 = fig4.add_subplot(131)
+ax_Chin_1.scatter(df_Chinstrap[['culmen_depth_mm']], df_Chinstrap[['body_mass_g']])
+ax_Chin_1.set_xlabel('culmen_depth(mm)')
+ax_Chin_1.set_ylabel('body_mass(g)')
+
+ax_Chin_2 = fig4.add_subplot(132)
+ax_Chin_2.scatter(df_Chinstrap[['culmen_length_mm']], df_Chinstrap[['body_mass_g']])
+ax_Chin_2.set_xlabel('culmen_length(mm)')
+ax_Chin_2.set_ylabel('body_mass(g)')
+
+ax_Chin_3 = fig4.add_subplot(133)
+ax_Chin_3.scatter(df_Chinstrap[['flipper_length_mm']], df_Chinstrap[['body_mass_g']])
+ax_Chin_3.set_xlabel('flipper_length(mm)')
+ax_Chin_3.set_ylabel('body_mass(g)')
 
 plt.show()
